@@ -26,7 +26,7 @@ g_valToStressLevel = { 0:"No stress", 1:"Low stress", 2:"Moderate stress", 3:"Hi
 def create_fhir_client():
     settings = {
         'app_id': 'python-fhir-client',  # This is the application ID, can be anything unique
-        'api_base': 'http://localhost:8080/fhir'  # HAPI FHIR server URL (R4 version)
+        'api_base': 'https://hapi.up.railway.app/fhir'  # HAPI FHIR server URL (R4 version)
     }
     fhir_client = client.FHIRClient(settings=settings)
     return fhir_client
@@ -206,7 +206,7 @@ def createPatient(firstName, lastName, age, gender, height, weight, sleepGoals):
     global g_PatientIdCounter
 
     # URL for the POST request
-    url = 'http://localhost:8080/fhir'
+    url = 'https://hapi.up.railway.app/fhir'
 
     # Create the Patient
     patientRequest = {
@@ -446,7 +446,7 @@ def getPatient(patientId):
 def addStressEntry(patientId, stressLevel):
 
     # URL for the POST request
-    url = 'http://localhost:8080/fhir'
+    url = 'https://hapi.up.railway.app/fhir'
 
     # Get current time
     curTime = getCurTime()
@@ -540,7 +540,7 @@ def loadData():
     global g_PatientIdCounter
 
     # URL for the POST request
-    url = 'http://localhost:8080/fhir'
+    url = 'https://hapi.up.railway.app/fhir'
 
     # Get the folder path
     # NOTE: This Python app must be launched from the 'server' directory 
@@ -626,7 +626,7 @@ def main():
     # Connect to the FHIR server
     #######################################################################
 
-    url = 'http://localhost:8080/fhir/metadata'
+    url = 'https://hapi.up.railway.app/fhir/metadata'
     connectToFhirServer(url)
 
     #######################################################################
