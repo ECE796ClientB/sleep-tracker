@@ -1,0 +1,27 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "37",
+        "name": [
+          {
+            "use": "official",
+            "family": "Clark",
+            "given": [
+              "Skyler"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1994-01-01"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "20",
+        "name": [
+          {
+            "use": "official",
+            "family": "Turner",
+            "given": [
+              "Avery"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1979-01-01"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    }
+  ]
+}

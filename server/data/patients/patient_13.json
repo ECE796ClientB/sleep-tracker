@@ -1,0 +1,27 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "13",
+        "name": [
+          {
+            "use": "official",
+            "family": "Lee",
+            "given": [
+              "Taylor"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1999-01-01"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    }
+  ]
+}
