@@ -1,0 +1,41 @@
+services:
+  hapi:
+    image: hapiproject/hapi:latest
+    container_name: hapi
+    network_mode: host
+    ports:
+      - "8080:8080" # Expose HAPI server on port 8080
+    environment:
+      - HAPI_FHIR_CORS_ENABLED=true
+      - HAPI_FHIR_CORS_ALLOWED_ORIGINS=http://localhost:3000
+      - HAPI_FHIR_CORS_ALLOWED_HEADERS=Content-Type,Authorization
+      - HAPI_FHIR_CORS_ALLOWED_METHODS=GET,POST,PUT,DELETE,OPTIONS
+      - HAPI_FHIR_CORS_MAX_AGE=3600
+
+  server:
+    build:
+      context: ./server
+    container_name: server
+    network_mode: host
+    volumes:
+      - ./server:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: ["python", "main.py"]
+
+  ui:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: ui
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./ui:/app
+      - node_modules:/app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    command: npm run dev
+
+volumes:
+  node_modules: {}
