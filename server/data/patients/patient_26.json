@@ -1,0 +1,27 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Patient",
+        "id": "26",
+        "name": [
+          {
+            "use": "official",
+            "family": "Martinez",
+            "given": [
+              "Morgan"
+            ]
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1987-01-01"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Patient"
+      }
+    }
+  ]
+}
