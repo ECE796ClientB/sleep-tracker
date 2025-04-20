@@ -61,7 +61,7 @@ def createPatient():
 @app.route('/sleepData', methods=['GET'])
 def getSleepData():
 
-    patientId = request.args.get('patientId')
+    patientId = operations.g_PatientIds[request.args.get('patientId')]
     
     # Calculate sleep data from last 7 days
     # Get the current time in UTC
