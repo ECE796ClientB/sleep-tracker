@@ -102,6 +102,7 @@ def getSleepData():
         'success': True,
         'data': responseData
     }
+    print(response)
     return jsonify(response)
 
 # Setup App
@@ -124,18 +125,4 @@ if __name__ == '__main__':
     
     # Connect to FHIR Server and load patients and observations
     setup()
-    
-    # Format the time
-    # startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
-    # endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
-    startTime = datetime.datetime(2024, 10, 23, 0, 0).isoformat()
-    endTime = datetime.datetime(2024, 10, 30, 23, 59).isoformat()
-
-     # Get the Heart Rate and Sleep Hours data
-    heartRates = operations.getHeartRateData(operations.g_PatientIds[10], startTime, endTime)
-    sleepHours = operations.getHoursSleptData(operations.g_PatientIds[10], startTime, endTime)
-
-    print(heartRates)
-    print(sleepHours)
-
     app.run(host='0.0.0.0', port=5000)
