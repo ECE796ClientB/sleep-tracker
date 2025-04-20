@@ -36,8 +36,8 @@ function Form() {
     {
       username: data.username,
       password: data.password,
-      firstName: data.firstName,
-      lastName: data.lastName,
+      firstName: "Joe",
+      lastName: "Balsamo",
       age: data.age,
       gender: data.gender,
       height: data.height,
