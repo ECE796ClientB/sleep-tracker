@@ -59,11 +59,11 @@ function Form() {
       const responseData = await response.json();
       if(responseData.patientId != 0) 
         {
-          setPatientId(data.patientId);
+          setPatientId(responseData.patientId);
   
            // Redirect to dashboard page and pass the Patient ID
           console.log("Successfully Created Patient: " + patientId);
-          navigate("/dashboard", { state: { patientId: data.patientId } });
+          navigate("/dashboard", { state: { patientId: responseData.patientId } });
         }
         else
         {
