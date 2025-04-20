@@ -15,7 +15,6 @@ interface FormData {
   gender: string;
   height: string;
   weight: string;
-  avg_sleep: number;
   sleep_goals: {
     duration?: boolean;
     quality?: boolean;
@@ -43,7 +42,7 @@ function Form() {
       gender: data.gender,
       height: data.height,
       weight: data.weight,
-      avg_sleep: data.avg_sleep
+      sleepGoals: "Goals"
     };
   
     try
