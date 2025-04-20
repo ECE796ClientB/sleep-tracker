@@ -14,7 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Used to communicate with FHIR server
-# EXPOSE 8080
+EXPOSE 5000
 
 # Set the environment variable for Python (optional but recommended)
 ENV PYTHONUNBUFFERED=1
