@@ -27,7 +27,8 @@ def login():
 
     # Return the login ID
     return jsonify({
-        'patientId': patientId
+        'patientId': patientId,
+        'success': True
     })
 
 @app.route('/createPatient', methods=['POST'])
@@ -53,13 +54,15 @@ def createPatient():
 
     # Return the new Patient ID
     return jsonify({
-        'patientId': patientId
+        'patientId': patientId,
+        'success': True
     })
 
 @app.route('/sleepData', methods=['GET'])
 def getSleepData():
 
-    patientId = request.args.get('patientId')
+    patientId = operations.g_PatientIds[10]#request.args.get('patientId')
+    
 
     # Calculate sleep data from last 7 days
     # Get the current time in UTC
@@ -86,7 +89,7 @@ def getSleepData():
 
     # Form the return response
     responseData = []
-    for i in range(7):
+    for i in range(len(heartRates)):
         responseData.append({
             "day": g_DayOfWeek[dayOfWeek],
             "heartRate": heartRates[i],
