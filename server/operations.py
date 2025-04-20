@@ -16,6 +16,7 @@ g_fhirUrl = 'https://hapi.up.railway.app/fhir'
 g_PatientIds = dict()
 g_PatientIdCounter = int(1)
 g_PatientLogins = dict()
+g_PatientUsernames = list()
 
 # 1 Cup of Coffee worth of Caffeien (mg)
 g_OneCupCoffeeCaffeineMg = 95
@@ -278,6 +279,10 @@ def createPatient(username, password, firstName, lastName, age, gender, height, 
 
     global g_PatientIdCounter
 
+    # Only continue if the username does not exist
+    if username not in g_PatientUsernames:
+        return 0
+
     # Create the Patient
     patientRequest = {
         "resourceType": "Bundle",
@@ -323,6 +328,7 @@ def createPatient(username, password, firstName, lastName, age, gender, height, 
         # print(response.json())
         retId = g_PatientIdCounter
         g_PatientLogins[(username, password)] = retId
+        g_PatientUsernames.append(username)
         g_PatientIdCounter +=1
     else:
         print('Failed to create patient')
@@ -725,7 +731,8 @@ def loadData():
                 name, extension = os.path.splitext(filename)
                 g_PatientIds[int(name[8:])] = patientId # Get the non-FHIR Patient ID from the filename 
                 # print(response.json())
-                g_PatientLogins[("patient_" + name[8:], "password_" + name[8:])] = g_PatientIdCounter 
+                g_PatientLogins[("patient_" + name[8:], "password_" + name[8:])] = g_PatientIdCounter
+                g_PatientUsernames.append("patient_" + name[8:])
                 g_PatientIdCounter += 1
             else:
                 print(f'{filename} - Failed to load patient')
