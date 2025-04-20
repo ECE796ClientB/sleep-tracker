@@ -22,7 +22,7 @@ function Homepage() {
     try {
       
       // Execute GET
-      const response = await fetch(`http://sleep-tracker-backend.up.railway.app/data?${params}`);
+      const response = await fetch(`https://sleep-tracker-backend.up.railway.app/login?${params}`);
       
       // Process Response
       // Make sure success = TRUE and a patient ID was returned
