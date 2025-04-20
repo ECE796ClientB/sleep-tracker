@@ -8,7 +8,7 @@ function DailyInputs() {
   const [cups, setCups] = useState('');
   const [hours, setHours] = useState('');
 
-  const handleClick = () => {
+  const handleClick = async() => {
     
 
     // Send POST request to backend
