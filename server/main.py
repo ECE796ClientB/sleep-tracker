@@ -44,18 +44,12 @@ def createPatient():
     sleepGoals = patientRequest.get('sleepGoals')
     
     # Create the patient
-    print("Creating Patient ", firstName, " ", lastName)
     patientId = operations.createPatient(username, password, firstName, lastName, age, gender, height, weight, sleepGoals)
-
-    # Make sure it was a success
-    success = True
-    if patientId == 0:
-        success = False
+    print("Created Patient ", patientId, ": ", firstName, " ", lastName)
 
     # Return the new Patient ID
     return jsonify({
-        'patientId': patientId,
-        'success': success
+        'patientId': patientId
     })
 
 # Setup App
