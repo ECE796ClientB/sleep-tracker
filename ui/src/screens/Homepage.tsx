@@ -8,7 +8,7 @@ function Homepage() {
   const [patientId, setPatientId] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Attempt to login with backend
     const params = new URLSearchParams(
       {
