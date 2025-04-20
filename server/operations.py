@@ -280,7 +280,7 @@ def createPatient(username, password, firstName, lastName, age, gender, height, 
     global g_PatientIdCounter
 
     # Only continue if the username does not exist
-    if username not in g_PatientUsernames:
+    if username in g_PatientUsernames:
         return 0
 
     # Create the Patient
