@@ -14,12 +14,10 @@ g_fhirUrl = 'https://hapi.up.railway.app/fhir'
 
 # Create dictionary of patient file to FHIR resource ID
 g_PatientIds = dict()
+g_FileNumberToPatientId = dict()
 g_PatientIdCounter = int(1)
 g_PatientLogins = dict()
 g_PatientUsernames = list()
-
-# 1 Cup of Coffee worth of Caffeien (mg)
-g_OneCupCoffeeCaffeineMg = 95
 
 # Now get the average stress level
 # This can be calculated by translating the stress levels to an int
@@ -711,7 +709,7 @@ def loadData():
         file_path = os.path.join(folder_path, filename)
         
         # Only process JSON files
-        if filename.startswith('patient_10') and filename.endswith('.json'):
+        if filename.startswith('patient_') and filename.endswith('.json'):
 
             # Open the file
             with open(file_path, 'r') as file:
@@ -730,7 +728,8 @@ def loadData():
                 match = re.search(r'/(?P<number>\d+)/', response.json()['entry'][0]['response']['location'])
                 patientId = match.group('number')
                 name, extension = os.path.splitext(filename)
-                g_PatientIds[int(name[8:])] = patientId # Get the non-FHIR Patient ID from the filename 
+                g_PatientIds[g_PatientIdCounter] = patientId # Get the non-FHIR Patient ID from the filename
+                g_FileNumberToPatientId[int(name[8:])] = patientId
                 # print(response.json())
                 g_PatientLogins[("patient_" + name[8:], "password_" + name[8:])] = g_PatientIdCounter
                 g_PatientUsernames.append("patient_" + name[8:])
@@ -753,7 +752,7 @@ def loadData():
         file_path = os.path.join(folder_path, filename)
         
         # Only process JSON files
-        if filename.startswith('observations_10') and filename.endswith('.json'):
+        if filename.startswith('observations_') and filename.endswith('.json'):
 
             # Open the file
             with open(file_path, 'r') as file:
@@ -763,8 +762,7 @@ def loadData():
 
             # Update the patient references with the correct patient ID
             name, extension = os.path.splitext(filename)
-            print(name)
-            patientId = int(name[13:]) # Get the non-FHIR Patient ID from the filename 
+            patientId = g_FileNumberToPatientId[int(name[13:])] # Get the non-FHIR Patient ID from the filename 
             findAndReplace(data, ("Patient/" + str(patientId)), ("Patient/" + g_PatientIds[patientId]) )
             # print(data)
 
