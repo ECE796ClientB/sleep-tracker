@@ -71,6 +71,13 @@ function Dashboard() {
         const result = await response.json();
 
         // Create the Sleep Data
+        const sleepDataPoints: SleepDataPoint[] = result.map(item => ({
+          date: item.day,
+          hours: item.hours,
+          heartRate: item.heartRate,
+        }));
+
+        setSleepData(sleepDataPoints)
       } 
       catch (error)
       {
@@ -81,7 +88,7 @@ function Dashboard() {
     fetchData();
   }, []);
 
-  const insights = evaluateSleepInsights(mockSleepData, sleepGoal);
+  const insights = evaluateSleepInsights(sleepData, sleepGoal);
 
   const handleButtonClick = () => {
     navigate("/dailyinput");
