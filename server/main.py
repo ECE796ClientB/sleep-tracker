@@ -12,6 +12,9 @@ CORS(app)  # Enable CORS for all routes
 # Map containing int -> the day of week, with Sunday being 0
 g_DayOfWeek = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday"}
 
+# 1 Cup of Coffee worth of Caffeien (mg)
+g_OneCupCoffeeCaffeineMg = 95
+
 @app.route('/login', methods=['GET'])
 def login():
 
@@ -61,7 +64,6 @@ def createPatient():
 @app.route('/sleepData', methods=['GET'])
 def getSleepData():
 
-    print(operations.g_PatientIds)
     patientId = operations.g_PatientIds[int(request.args.get('patientId'))]
     
     # Calculate sleep data from last 7 days
@@ -84,9 +86,6 @@ def getSleepData():
     heartRates = operations.getHeartRateData(patientId, startTime, endTime)
     sleepHours = operations.getHoursSleptData(patientId, startTime, endTime)
 
-    print(heartRates)
-    print(sleepHours)
-
     # Form the return response
     responseData = []
     for i in range(len(heartRates)):
@@ -101,6 +100,22 @@ def getSleepData():
     return jsonify({
         'success': True,
         'data': responseData
+    })
+
+@app.route('/logDailies', methods=['POST'])
+def logDailies():
+
+    patientId = operations.g_PatientIds[int(request.args.get('patientId'))]
+    stressLevel = request.args.get('stressLevel')
+    exercise = request.args.get('exercise')
+    cupsCoffee = request.args.get('caffeine')
+
+    operations.addStressEntry(patientId, stressLevel)
+    operations.addExerciseEntry(patientId, exercise)
+    operations.addCaffeineIntake(patientId, cupsCoffee * g_OneCupCoffeeCaffeineMg)
+
+    return jsonify({
+        'success': True
     })
 
 # Setup App
