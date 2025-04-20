@@ -13,12 +13,17 @@ def login():
 
     username = request.args.get('username')
     password = request.args.get('password')
-    print("Attempting to Login ", username, ":", password)
+
+    patientId = operations.login(username, password)
+    print("Attempting to Login for ", username)
+    if patientId != 0:
+        print("Successful Login for Patient ", patientId)
+    else:
+        print("Unsuccessful Login, could not find Patient")
 
     # Return the login ID
     return jsonify({
-        'patientId': operations.login(username, password),
-        'success': True
+        'patientId': patientId
     })
 
 @app.route('/createPatient', methods=['POST'])
@@ -109,4 +114,5 @@ if __name__ == '__main__':
     
     # Connect to FHIR Server and load patients and observations
     setup()
+
     app.run(host='0.0.0.0', port=5000)
