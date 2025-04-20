@@ -1,4 +1,5 @@
 import os
+import pytz
 import datetime
 import operations # Custom file with CRUD operations
 
@@ -48,6 +49,33 @@ def createPatient():
     print("Created Patient ", patientId, ": ", firstName, " ", lastName)
 
     # Return the new Patient ID
+    return jsonify({
+        'patientId': patientId
+    })
+
+@app.route('/sleepData', methods=['GET'])
+def getSleepData():
+
+    patientId = request.args.get('patientId')
+
+    # Calculate sleep data from last 7 days
+    # Get the current time in UTC
+    # curTime = datetime.datetime.now(pytz.utc)
+    curTime = datetime.datetime(2024, 10, 30, 0, 0).isoformat()
+    lastWeek = curTime - datetime.timedelta(weeks=1)
+    
+    # Format the time
+    startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
+    endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    # Get the Heart Rate and Sleep Hours data
+    heartRates = operations.getHeartRateData(patientId, startTime, endTime)
+    sleepHours = operations.getHoursSleptData(patientId, startTime, endTime)
+
+    print(heartRates)
+    print(sleepHours)
+
+    # Return the login ID
     return jsonify({
         'patientId': patientId
     })
