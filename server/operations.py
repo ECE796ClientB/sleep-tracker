@@ -66,27 +66,28 @@ def getDataValuesByLonicCode(patientId, startTime, endTime, lonicCode):
     # Build query
     searchParams = {
         'patient': patientId,
-        'date': f'ge{startTime}',
-        'date': f'le{endTime}',
+        "date": [f"ge{startTime}", f"le{endTime}"],
         'code': f'{lonicCode}'
     }
 
-    # Execute query
-    observations = observation.Observation.where(searchParams).perform_resources(fhir_client.server)
+    # Send the GET request
+    response = requests.get(f"{g_fhirUrl}/Observation", params=searchParams)
 
-     # Parse results
+    # Return array of values
     values = []
-    for obs in observations:
-        
-        # Debug prints
-        # print(f"Observation ID: {obs.id}")
-        # print(f"Effective Date: {obs.effectiveDateTime.as_json()}")
-        # print(f"Value: {obs.valueQuantity.value} {obs.valueQuantity.unit}")
-        # print(f"Patient Reference: {obs.subject.reference}")
-        # print('--------------------------------------------------------------------------------')
 
-         # Append value
-        values.append( obs.valueQuantity.value )
+    # Parse the JSON response
+    if response.status_code == 200:
+        bundle = response.json()
+        observations = bundle.get("entry", [])
+        
+        for entry in observations:
+            obs = entry["resource"]
+            value = obs.get("valueQuantity", {}).get("value")
+            values.append( value )
+
+    else:
+        print("Request failed:", response.status_code)
 
     return values
 
