@@ -98,7 +98,11 @@ def getSleepData():
         dayOfWeek += 1
 
     # Return the data
-    return jsonify(responseData)
+    response = {
+        'success': True,
+        'data': responseData
+    }
+    return jsonify(response)
 
 # Setup App
 def setup():
