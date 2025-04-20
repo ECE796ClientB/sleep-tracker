@@ -32,12 +32,9 @@ function Dashboard() {
         const response = await fetch(`https://sleep-tracker-backend.up.railway.app/sleepData?${params}`);
         
         const result = await response.json();
-        
-        // Parse the JSON string into a JavaScript array of objects
-        const originalData = JSON.parse(result.data);
 
         // Create the Sleep Data
-        const sleepDataPoints: SleepDataPoint[] = originalData.map(item => ({
+        const sleepDataPoints: SleepDataPoint[] = result.data.map(item => ({
           date: item.day,
           hours: item.hours,
           heartRate: item.heartRate,
