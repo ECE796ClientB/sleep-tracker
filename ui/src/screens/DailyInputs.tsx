@@ -1,10 +1,11 @@
 import { Box, Typography, Slider, Button, Stack, TextField } from "@mui/material";
 import React, { useState } from 'react';
+import { useLocation } from "react-router-dom";
 // import InputField from "../components/Fields/InputField";
 
 function DailyInputs() {
-
-  const [patientId, setPatientId] = useState('');
+  const location = useLocation();
+  const patientId = location.state?.patientId;
   const [cups, setCups] = useState('');
   const [hours, setHours] = useState('');
 
