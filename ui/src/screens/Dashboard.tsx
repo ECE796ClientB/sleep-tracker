@@ -114,14 +114,14 @@ function Dashboard() {
         <Typography variant="h5" gutterBottom className="chartTitle">
           Hours of Sleep
         </Typography>
-        <HoursOfSleepChart data={mockSleepData} />
+        <HoursOfSleepChart data={sleepData} />
       </Box>
 
       <Box className="chartContainer">
         <Typography variant="h5" gutterBottom className="chartTitle">
           Heart Rate
         </Typography>
-        <HeartRateChart data={mockSleepData} />
+        <HeartRateChart data={sleepData} />
       </Box>
 
       <Box className="chartContainer">
