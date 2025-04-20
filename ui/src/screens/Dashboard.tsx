@@ -1,4 +1,5 @@
 import { Typography, Box, Button } from "@mui/material";
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from "react-router-dom";
 import { sleepGoal } from "../constants/sleepGoals";
 import { evaluateSleepInsights } from "../utils/sleepInsights";
@@ -8,79 +9,81 @@ import Recommendations from "../components/Charts/Recommendations";
 import { SleepDataPoint } from "../data/sleepData";
 
 interface LocationState {
-  username?: string;
+  patientId?: number;
 }
 
 function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
   const { username } = (location.state as LocationState) || {};
+  const [patientId, setPatientId] = useState("");
+  const [sleepData, setSleepData] = useState<SleepDataPoint[]>([]);
 
   const mockSleepData: SleepDataPoint[] = [
     {
-      day: "Monday",
+      date: "Monday",
       hours: 7,
       heartRate: 62,
-      caffeine: 0,
-      exercise: 1,
-      stress: "Low",
-      age: 30,
     },
     {
-      day: "Tuesday",
+      date: "Tuesday",
       hours: 6.5,
       heartRate: 68,
-      caffeine: 1,
-      exercise: 0.5,
-      stress: "Moderate",
-      age: 30,
     },
     {
-      day: "Wednesday",
+      date: "Wednesday",
       hours: 8,
       heartRate: 65,
-      caffeine: 0,
-      exercise: 1.5,
-      stress: "Low",
-      age: 30,
     },
     {
-      day: "Thursday",
+      date: "Thursday",
       hours: 5.5,
       heartRate: 75,
-      caffeine: 2,
-      exercise: 0,
-      stress: "High",
-      age: 30,
     },
     {
-      day: "Friday",
+      date: "Friday",
       hours: 7.8,
       heartRate: 60,
-      caffeine: 0.5,
-      exercise: 1,
-      stress: "Moderate",
-      age: 30,
     },
     {
-      day: "Saturday",
+      date: "Saturday",
       hours: 9,
       heartRate: 58,
-      caffeine: 0,
-      exercise: 2,
-      stress: "Low",
-      age: 30,
     },
     {
-      day: "Sunday",
+      date: "Sunday",
       hours: 7.2,
       heartRate: 63,
-      caffeine: 0,
-      exercise: 0.8,
-      stress: "Low",
-      age: 30,
     },
   ];
+
+  // Get Sleep Data
+  useEffect(() => {
+
+    // Create GET request params
+    const params = new URLSearchParams(
+      {
+        patientId: patientId
+      }
+    );
+
+    // This runs once when the component mounts
+    const fetchData = async () => {
+      try 
+      {
+        const response = await fetch(`https://sleep-tracker-backend.up.railway.app/sleepData?${params}`);
+        const result = await response.json();
+
+        // Create the Sleep Data
+      } 
+      catch (error)
+      {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const insights = evaluateSleepInsights(mockSleepData, sleepGoal);
 
@@ -103,12 +106,6 @@ function Dashboard() {
       <Typography variant="h4" gutterBottom className="chartTitle">
         Sleep Dashboard
       </Typography>
-
-      {username && (
-        <Typography variant="h6" gutterBottom>
-          Welcome, {username}!
-        </Typography>
-      )}
 
       <Box className="chartContainer">
         <Typography variant="h5" gutterBottom className="chartTitle">
