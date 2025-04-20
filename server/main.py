@@ -711,7 +711,7 @@ def loadData():
         file_path = os.path.join(folder_path, filename)
         
         # Only process JSON files
-        if filename.startswith('patient_') and filename.endswith('.json'):
+        if filename.startswith('patient_2') and filename.endswith('.json'):
 
             # Open the file
             with open(file_path, 'r') as file:
@@ -753,7 +753,7 @@ def loadData():
         file_path = os.path.join(folder_path, filename)
         
         # Only process JSON files
-        if filename.startswith('observations_') and filename.endswith('.json'):
+        if filename.startswith('observations_2') and filename.endswith('.json'):
 
             # Open the file
             with open(file_path, 'r') as file:
