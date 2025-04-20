@@ -105,6 +105,7 @@ def getSleepData():
 @app.route('/logDailies', methods=['POST'])
 def logDailies():
 
+    print(request.json())
     patientId = operations.g_PatientIds[int(request.args.get('patientId'))]
     stressLevel = request.args.get('stressLevel')
     exercise = request.args.get('exercise')
