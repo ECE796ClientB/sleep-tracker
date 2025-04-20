@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Homepage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [patientId, setPatientId] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = () => {
