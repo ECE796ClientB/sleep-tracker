@@ -95,7 +95,7 @@ def getSleepData():
             "heartRate": heartRates[i],
             "hours": sleepHours[i]
         } )
-        dayOfWeek += 1
+        dayOfWeek = (dayOfWeek + 1) % 7
 
     # Return the data
     response = {
@@ -119,45 +119,6 @@ def setup():
     #######################################################################
     
     operations.loadData()
-
-    # # #######################################################################
-    # # # Test Functions
-    # # #######################################################################
-
-    # # Start/End times
-    # startTime = datetime.datetime(2024, 9, 30, 0, 0).isoformat()
-    # endTime = datetime.datetime(2024, 12, 28, 23, 59).isoformat()
-
-    # for i in range(10, 11):
-
-    #     # Get data
-    #     heartRates = operations.getHeartRateData(operations.g_PatientIds[i], startTime, endTime)
-    #     # print("Heart Rates: ", heartRates)
-    #     stressLevel = operations.getAverageStressLevel(operations.g_PatientIds[i], startTime, endTime)
-    #     print("Stress Level: ", stressLevel)
-    #     exerciseHours = operations.getAverageExerciseHours(operations.g_PatientIds[i], startTime, endTime)
-    #     print("Exercise Hours: ", exerciseHours)
-    #     caffeineIntake = operations.getAverageCaffeineIntake(operations.g_PatientIds[i], startTime, endTime)
-    #     print("Caffeine Intake: ", caffeineIntake)
-    #     # sleepQuality = operations.calculateSleepQuality(heartRates)
-    #     # print("Sleep Quality: ", sleepQuality)
-
-    #     # Flood the stress levels with no stress to verify the addStress works
-    #     for j in range(0, 10):
-    #         operations.addStressEntry(operations.g_PatientIds[i], "No stress")
-    #         operations.addExerciseEntry(operations.g_PatientIds[i], 5)
-    #         operations.addCaffeineIntake(operations.g_PatientIds[i], 4)
-    #     endTime = datetime.datetime(2026, 12, 28, 23, 59).isoformat()
-    #     stressLevel = operations.getAverageStressLevel(operations.g_PatientIds[i], startTime, endTime)
-    #     exerciseHours = operations.getAverageExerciseHours(operations.g_PatientIds[i], startTime, endTime)
-    #     caffeineIntake = operations.getAverageCaffeineIntake(operations.g_PatientIds[i], startTime, endTime)
-    #     print("Updated Stress Level: ", stressLevel)
-    #     print("Updated Exercise Hours: ", exerciseHours)
-    #     print("Updated Caffeine Intake: ", caffeineIntake)
-
-    # myId = operations.createPatient("username", "password", "Joe", "Balsamo", "27", "male", "6 ft 0 in", "185", "Reduce wakeups during the night, Improve sleep quality")
-    # operations.updateSleepGoals(operations.g_PatientIds[myId], "Test")
-    # # getPatient(g_PatientIds[myId])
 
 if __name__ == '__main__':
     
