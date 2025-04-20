@@ -8,7 +8,7 @@ function Homepage() {
   const [patientId, setPatientId] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     // Attempt to login with backend
     const params = new URLSearchParams(
       {
@@ -23,7 +23,7 @@ function Homepage() {
       const response = await fetch(`https://sleep-tracker-backend.up.railway.app/login?${params}`);
       
       // Process Response
-      // Make sure success = TRUE and a patient ID was returned
+      // Make sure a patient ID was returned
       const data = await response.json();
       if(data.patientId != 0) 
       {
@@ -31,7 +31,7 @@ function Homepage() {
 
          // Redirect to dashboard page and pass the Patient ID
         console.log("Successfully Logged in: " + username);
-        navigate("/dashboard", { state: { patientId } });
+        navigate("/dashboard", { state: { patientId: patientId } });
       }
       else
       {
