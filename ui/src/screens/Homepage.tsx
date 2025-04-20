@@ -27,14 +27,18 @@ function Homepage() {
       // Process Response
       // Make sure success = TRUE and a patient ID was returned
       const data = await response.json();
-      if(data.success == 'True' && data.patientId != 0) 
+      if(data.patientId != 0) 
       {
         setPatientId(data.patientId);
 
          // Redirect to dashboard page and pass the Patient ID
         console.log("Successfully Logged in: " + username);
         navigate("/dashboard", { state: { patientId } });
-      } 
+      }
+      else
+      {
+        console.log("Could not login: " + username);
+      }
 
     } catch (err) {
       console.error('Error:', err);
