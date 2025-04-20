@@ -15,6 +15,7 @@ interface FormData {
   gender: string;
   height: string;
   weight: string;
+  avg_sleep: number;
   sleep_goals: {
     duration?: boolean;
     quality?: boolean;
@@ -62,7 +63,7 @@ function Form() {
   
            // Redirect to dashboard page and pass the Patient ID
           console.log("Successfully Created Patient: " + patientId);
-          navigate("/dashboard", { state: { patientId } });
+          navigate("/dashboard", { state: { patientId: data.patientId } });
         }
         else
         {
