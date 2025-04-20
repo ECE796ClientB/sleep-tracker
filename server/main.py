@@ -29,6 +29,8 @@ def login():
 @app.route('/createPatient', methods=['POST'])
 def createPatient():
 
+    print(request.json())
+    
     # Get fields from request
     username = request.args.get('username')
     password = request.args.get('password')
