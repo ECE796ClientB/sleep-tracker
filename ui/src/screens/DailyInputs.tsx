@@ -1,15 +1,39 @@
-import { Box, Typography, Slider, Button, Stack } from "@mui/material";
+import { Box, Typography, Slider, Button, Stack, TextField } from "@mui/material";
 import React, { useState } from 'react';
-import InputField from "../components/Fields/InputField";
+// import InputField from "../components/Fields/InputField";
 
 function DailyInputs() {
 
+  const [patientId, setPatientId] = useState('');
   const [cups, setCups] = useState('');
   const [hours, setHours] = useState('');
 
   const handleClick = () => {
-    console.log("Button clicked!");
     
+
+    // Send POST request to backend
+    const payload =
+    {
+      patientId: patientId,
+      cups: cups,
+      hours: hours,
+      stressLevel: "No stress"
+    };
+  
+    try
+    {
+      const response = await fetch('https://sleep-tracker-backend.up.railway.app/logDailies', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json', // Tells the backend to expect JSON
+        },
+        body: JSON.stringify(payload),
+      });
+    }
+    catch (err)
+    {
+      console.error('Error:', err);
+    }
 
   };
 
@@ -42,12 +66,12 @@ function DailyInputs() {
 
           <Typography variant="h6">Stress Level:</Typography>
           <Slider
-            defaultValue={50}
+            defaultValue={4}
             valueLabelDisplay="auto"
             step={1}
             marks
             min={0}
-            max={100}
+            max={4}
           />
         </Stack>
         <Button
