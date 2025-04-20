@@ -61,9 +61,8 @@ def createPatient():
 @app.route('/sleepData', methods=['GET'])
 def getSleepData():
 
-    patientId = operations.g_PatientIds[10]#request.args.get('patientId')
+    patientId = request.args.get('patientId')
     
-
     # Calculate sleep data from last 7 days
     # Get the current time in UTC
     curTime = datetime.datetime.now(pytz.utc)
