@@ -15,44 +15,6 @@ function Dashboard() {
   const patientId = location.state?.patientId;
   const [sleepData, setSleepData] = useState<SleepDataPoint[]>([]);
 
-  const mockSleepData: SleepDataPoint[] = [
-    {
-      date: "Monday",
-      hours: 7,
-      heartRate: 62,
-    },
-    {
-      date: "Tuesday",
-      hours: 6.5,
-      heartRate: 68,
-    },
-    {
-      date: "Wednesday",
-      hours: 8,
-      heartRate: 65,
-    },
-    {
-      date: "Thursday",
-      hours: 5.5,
-      heartRate: 75,
-    },
-    {
-      date: "Friday",
-      hours: 7.8,
-      heartRate: 60,
-    },
-    {
-      date: "Saturday",
-      hours: 9,
-      heartRate: 58,
-    },
-    {
-      date: "Sunday",
-      hours: 7.2,
-      heartRate: 63,
-    },
-  ];
-
   // Get Sleep Data
   useEffect(() => {
 
