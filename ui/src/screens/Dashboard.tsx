@@ -8,15 +8,11 @@ import HeartRateChart from "../components/Charts/HeartRateChart";
 import Recommendations from "../components/Charts/Recommendations";
 import { SleepDataPoint } from "../data/sleepData";
 
-interface LocationState {
-  patientId?: number;
-}
 
 function Dashboard() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { username } = (location.state as LocationState) || {};
-  const [patientId, setPatientId] = useState("");
+  const patientId = location.state?.patientId;
   const [sleepData, setSleepData] = useState<SleepDataPoint[]>([]);
 
   const mockSleepData: SleepDataPoint[] = [
