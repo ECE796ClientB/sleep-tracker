@@ -763,7 +763,7 @@ def loadData():
             # Update the patient references with the correct patient ID
             name, extension = os.path.splitext(filename)
             patientId = g_FileNumberToPatientId[int(name[13:])] # Get the non-FHIR Patient ID from the filename 
-            findAndReplace(data, ("Patient/" + str(int(name[13:])), ("Patient/" + patientId) )
+            findAndReplace(data, ("Patient/" + str(int(name[13:])), ("Patient/" + patientId) ))
             # print(data)
 
             # Send POST request with JSON data
