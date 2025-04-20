@@ -27,6 +27,8 @@ function Homepage() {
       const data = await response.json();
       if(data.patientId != 0) 
       {
+        setPatientId(data.patientId);
+
          // Redirect to dashboard page and pass the Patient ID
         console.log("Successfully Logged in: " + username);
         navigate("/dashboard", { state: { patientId: data.patientId } });

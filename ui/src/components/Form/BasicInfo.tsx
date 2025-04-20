@@ -14,11 +14,6 @@ function BasicInfo() {
         <InputField id="gender" label="Gender" />
         <InputField id="height" label="Height (cm)" type="number" />
         <InputField id="weight" label="Weight (kg)" type="number" />
-        <InputField
-          id="avg_sleep"
-          label="Average hours of sleep per night"
-          type="number"
-        />
       </Stack>
     </Box>
   );

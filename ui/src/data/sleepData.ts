@@ -1,11 +1,7 @@
 interface SleepDataPoint {
-  day: string;
+  date: string;
   hours: number;
   heartRate: number;
-  caffeine: number;
-  exercise: number;
-  stress: "Low" | "Moderate" | "High" | "Extremely Stressed";
-  age: number;
 }
 
 const sleepData: SleepDataPoint[] = [];

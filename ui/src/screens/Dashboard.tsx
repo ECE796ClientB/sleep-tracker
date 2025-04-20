@@ -54,7 +54,7 @@ function Dashboard() {
   const insights = evaluateSleepInsights(sleepData, sleepGoal);
 
   const handleButtonClick = () => {
-    navigate("/dailyinput");
+    navigate("/dailyinput", { state: { patientId: patientId } });
   };
 
   return (
