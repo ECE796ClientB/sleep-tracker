@@ -5,12 +5,40 @@ import { Link, useNavigate } from "react-router-dom";
 function Homepage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [patientId, setPatientId] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Redirect to dashboard page and pass the username and password values
-    console.log("Username is: " + username);
-    navigate("/dashboard", { state: { username, password } });
+  // Handles logging in
+  const handleLogin = async () => {
+    
+    // Attempt to login with backend
+    const params = new URLSearchParams(
+      {
+        username: username,
+        password: password
+      }
+    );
+  
+    try {
+      
+      // Execute GET
+      const response = await fetch(`http://sleep-tracker-backend.up.railway.app/data?${params}`);
+      
+      // Process Response
+      // Make sure success = TRUE and a patient ID was returned
+      const data = await response.json();
+      if(data.success == 'True' && data.patientId != 0) 
+      {
+        setPatientId(data.patientId);
+
+         // Redirect to dashboard page and pass the Patient ID
+        console.log("Successfully Logged in: " + username);
+        navigate("/dashboard", { state: { patientId } });
+      } 
+
+    } catch (err) {
+      console.error('Error:', err);
+    }
   };
 
   return (
@@ -22,7 +50,7 @@ function Homepage() {
       height="100vh"
     >
       <Typography variant="h2" gutterBottom>
-        Sleep Tracker
+        Login to Sleep Tracker
       </Typography>
 
       <Stack
