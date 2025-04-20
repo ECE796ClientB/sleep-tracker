@@ -9,6 +9,9 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
+# Map containing int -> the day of week, with Sunday being 0
+g_DayOfWeek = { 0: "Sunday", 1: "Monday", 2: "Tuesday", 3: "Wednesday", 4: "Thursday", 5: "Friday", 6: "Saturday"}
+
 @app.route('/login', methods=['GET'])
 def login():
 
@@ -60,13 +63,19 @@ def getSleepData():
 
     # Calculate sleep data from last 7 days
     # Get the current time in UTC
-    # curTime = datetime.datetime.now(pytz.utc)
-    curTime = datetime.datetime(2024, 10, 30, 0, 0).isoformat()
-    lastWeek = curTime - datetime.timedelta(weeks=1)
+    curTime = datetime.datetime.now(pytz.utc)
+    lastWeek = curTime - datetime.timedelta(days=7)
+
+    # Get current day of the week
+    # Get day of the week as an integer (Monday is 0, Sunday is 6)
+    dayOfWeek = curTime.weekday()
     
     # Format the time
-    startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
-    endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
+    # startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
+    # endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+    startTime = datetime.datetime(2024, 10, 23, 23, 59).isoformat()
+    endTime = datetime.datetime(2024, 10, 30, 23, 59).isoformat()
 
     # Get the Heart Rate and Sleep Hours data
     heartRates = operations.getHeartRateData(patientId, startTime, endTime)
@@ -75,14 +84,22 @@ def getSleepData():
     print(heartRates)
     print(sleepHours)
 
-    # Return the login ID
-    return jsonify({
-        'patientId': patientId
-    })
+    # Form the return response
+    responseData = []
+    for i in range(7):
+        responseData.append({
+            "day": g_DayOfWeek[dayOfWeek],
+            "heartRate": heartRates[i],
+            "hours": sleepHours[i]
+        } )
+        dayOfWeek += 1
+
+    # Return the data
+    return jsonify(responseData)
 
 # Setup App
 def setup():
-    
+
     #######################################################################
     # Connect to the FHIR server
     #######################################################################
@@ -139,5 +156,18 @@ if __name__ == '__main__':
     
     # Connect to FHIR Server and load patients and observations
     setup()
+    
+    # Format the time
+    # startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
+    # endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
+    startTime = datetime.datetime(2024, 10, 23, 0, 0).isoformat()
+    endTime = datetime.datetime(2024, 10, 30, 23, 59).isoformat()
+
+     # Get the Heart Rate and Sleep Hours data
+    heartRates = operations.getHeartRateData(operations.g_PatientIds[10], startTime, endTime)
+    sleepHours = operations.getHoursSleptData(operations.g_PatientIds[10], startTime, endTime)
+
+    print(heartRates)
+    print(sleepHours)
 
     app.run(host='0.0.0.0', port=5000)
