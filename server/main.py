@@ -29,18 +29,19 @@ def login():
 @app.route('/createPatient', methods=['POST'])
 def createPatient():
 
-    print(request.json())
-    
+    # Get the request args
+    patientRequest = request.get_json()
+
     # Get fields from request
-    username = request.args.get('username')
-    password = request.args.get('password')
-    firstName = request.args.get('firstName')
-    lastName = request.args.get('lastName')
-    age = request.args.get('age')
-    gender = request.args.get('gender')
-    height = request.args.get('height')
-    weight = request.args.get('weight')
-    sleepGoals = request.args.get('sleepGoals')
+    username = patientRequest.get('username')
+    password = patientRequest.get('password')
+    firstName = patientRequest.get('firstName')
+    lastName = patientRequest.get('lastName')
+    age = patientRequest.get('age')
+    gender = patientRequest.get('gender')
+    height = patientRequest.get('height')
+    weight = patientRequest.get('weight')
+    sleepGoals = patientRequest.get('sleepGoals')
     
     # Create the patient
     print("Creating Patient ", firstName, " ", lastName)
