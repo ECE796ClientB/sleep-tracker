@@ -64,9 +64,9 @@ function Dashboard() {
         <Button
           variant="contained"
           color="primary"
-          onClick={handleButtonClickProfile}
+          onClick={handleButtonClickDaily}
         >
-          Edit Profile
+          Import Daily Values
         </Button>
       </Box>
 
@@ -90,16 +90,6 @@ function Dashboard() {
 
       <Box className="chartContainer">
         <Recommendations insights={insights} />
-      </Box>
-
-      <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleButtonClickDaily}
-        >
-          Import Daily Values
-        </Button>
       </Box>
     </Box>
   );
