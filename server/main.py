@@ -128,6 +128,8 @@ def logDailies():
     operations.addExerciseEntry(patientId, exercise)
     operations.addCaffeineIntake(patientId, cupsCoffee * g_OneCupCoffeeCaffeineMg)
 
+    print("Added Stuff, yay")
+
     return jsonify({
         'success': True
     })
