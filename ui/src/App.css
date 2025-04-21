@@ -1,0 +1,128 @@
+/* Global Styles */
+body {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* Container Styles */
+.container {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Table Styles */
+.table {
+    background-color: #2e2e4d;
+}
+
+.tableCell {
+    color: #e0e0e0;
+}
+
+/* Chart Container Styles */
+.chartContainer {
+    margin-top: 40px;
+}
+
+/* Chart Title Styles */
+.chartTitle {
+    color: #e0e0e0;
+}
+
+/* Recharts Styles */
+.recharts-cartesian-grid line {
+    stroke: #444466;
+}
+
+.recharts-x-axis .recharts-cartesian-axis-tick line,
+.recharts-y-axis .recharts-cartesian-axis-tick line {
+    stroke: #e0e0e0;
+}
+
+.recharts-x-axis .recharts-cartesian-axis-tick text,
+.recharts-y-axis .recharts-cartesian-axis-tick text {
+    fill: #e0e0e0;
+}
+
+.recharts-tooltip-wrapper {
+    background-color: #333366;
+    color: #e0e0e0;
+}
+
+.recharts-legend-item text {
+    fill: #e0e0e0;
+}
+
+/* Form Styles */
+.formContainer {
+    background-color: #2e2e4d;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: auto;
+}
+
+.formTitle {
+    color: #e0e0e0;
+    margin-bottom: 20px;
+}
+
+.textField {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.textField .MuiInputBase-input {
+    color: #ffffff; /* White color for input text */
+}
+
+.textField .MuiInputLabel-root {
+    color: #ffffff; /* White color for label text */
+}
+
+.textField .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: #e0e0e0; /* Light color for input border */
+}
+
+.textField .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #bb86fc; /* Light color for input border on hover */
+}
+
+.textField .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #bb86fc; /* Light color for input border on focus */
+}
+
+.checkboxField .MuiCheckbox-root {
+    color: #e0e0e0; /* Light color for checkbox */
+}
+
+.checkboxField .MuiCheckbox-root.Mui-checked {
+    color: #bb86fc; /* Light color for checked checkbox */
+}
+
+.checkboxField .MuiFormControlLabel-label {
+    color: #e0e0e0; /* Light color for checkbox label */
+}
+
+.button {
+    background-color: #bb86fc;
+    color: #1a1a2e;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color: #9d6efc;
+}
