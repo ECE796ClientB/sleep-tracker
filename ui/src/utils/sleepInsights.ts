@@ -22,10 +22,10 @@ export function evaluateSleepInsights(
   const daysWithHighCaffeineGe3 = data.filter((d) => d.caffeine >= 3);
   const daysWithLowCaffeine = data.filter((d) => d.caffeine <= 1);
   const daysWithHighStress = data.filter(
-    (d) => d.stress === "High" || d.stress === "Extremely Stressed"
+    (d) => d.stress === "High stress" || d.stress === "Extremely Stressed"
   );
   const daysWithLowOrModerateStress = data.filter(
-    (d) => d.stress === "Low" || d.stress === "Moderate"
+    (d) => d.stress === "No stress" || (d) => d.stress === "Low stress" || d.stress === "Moderate stress"
   );
   const daysWithHighHeartRate = data.filter((d) => d.heartRate > 85);
   const daysWithNoExercise = data.filter((d) => d.exercise === 0);
