@@ -117,10 +117,12 @@ def getSleepData():
 @app.route('/logDailies', methods=['POST'])
 def logDailies():
 
-    patientId = operations.g_PatientIds[int(request.args.get('patientId'))]
-    stressLevel = request.args.get('stressLevel')
-    exercise = request.args.get('exercise')
-    cupsCoffee = request.args.get('caffeine')
+    dailiesRequest = request.get_json()
+
+    patientId = operations.g_PatientIds[int(dailiesRequest.get('patientId'))]
+    stressLevel = dailiesRequest.get('stressLevel')
+    exercise = dailiesRequest.get('exercise')
+    cupsCoffee = dailiesRequest.get('caffeine')
 
     operations.addStressEntry(patientId, stressLevel)
     operations.addExerciseEntry(patientId, exercise)
