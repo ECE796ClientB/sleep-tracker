@@ -42,7 +42,7 @@ function Dashboard() {
             age: item.age
           })
         );
-        
+
         setSleepData(sleepDataPoints);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -58,19 +58,15 @@ function Dashboard() {
     navigate("/dailyinput");
   };
 
-  const handleButtonClickProfile = () => {
-    navigate("/create-profile");
-  };
-
   return (
     <Box className="container">
       <Box sx={{ position: "absolute", top: 16, right: 16 }}>
         <Button
           variant="contained"
           color="primary"
-          onClick={handleButtonClickProfile}
+          onClick={handleButtonClickDaily}
         >
-          Edit Profile
+          Import Daily Value
         </Button>
       </Box>
 
@@ -94,16 +90,6 @@ function Dashboard() {
 
       <Box className="chartContainer">
         <Recommendations insights={insights} />
-      </Box>
-
-      <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleButtonClickDaily}
-        >
-          Import Daily Values
-        </Button>
       </Box>
     </Box>
   );
