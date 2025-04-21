@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import InputField from "../components/Fields/InputField";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useForm, FormProvider, SubmitHandler } from "react-hook-form";
 
 interface FormData {
@@ -20,6 +21,9 @@ interface FormData {
 
 function DailyInputs() {
   const form = useForm<FormData>();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const patientId = location.state?.patientId;
   const { handleSubmit } = form;
   const [stressLevel, setStressLevel] = useState("0");
 
@@ -35,9 +39,34 @@ function DailyInputs() {
     setStressLevel(event.target.value);
   };
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log("Form Data", data);
-    // send API request here
+  const onSubmit: SubmitHandler<FormData> = async(data) => {
+    
+    // Send POST request to backend
+    const payload = {
+      patientId: patientId
+      caffeine: data.caffeine,
+      exercise: data.exercise,
+      stressLevel: data.stressLevel 
+    };
+
+    try {
+      const response = await fetch(
+        "https://sleep-tracker-backend.up.railway.app/createPatient",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Tells the backend to expect JSON
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const responseData = await response.json();
+      navigate("/dashboard", { state: { patientId: patientId }, });
+      } 
+      catch (err) {
+        console.error("Error:", err);
+      }
   };
 
   return (
