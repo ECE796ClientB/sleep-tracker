@@ -79,8 +79,8 @@ def getSleepData():
     # startTime = lastWeek.strftime('%Y-%m-%dT%H:%M:%SZ')
     # endTime = curTime.strftime('%Y-%m-%dT%H:%M:%SZ')
 
-    startTime = datetime.datetime(2024, 10, 23, 23, 59).isoformat()
-    endTime = datetime.datetime(2024, 10, 30, 23, 59).isoformat()
+    startTime = datetime.datetime(2025, 3, 26, 23, 59).isoformat()
+    endTime = datetime.datetime(2025, 3, 12, 23, 59).isoformat()
 
     # Get the Heart Rate and Sleep Hours data
     heartRates = operations.getHeartRateData(patientId, startTime, endTime)
