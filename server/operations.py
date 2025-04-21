@@ -200,6 +200,17 @@ def getHoursSleptData(patientId, startTime, endTime):
     # Return heart rates    
     return hoursSlept
 
+# Get Stress Levels of a patient filtered by start and end times
+def getStressLevels(patientId, startTime, endTime):
+
+    # Code text for Stress Level
+    codeText = "Stress level"
+
+    # Stress Levels
+    stressLevels = getDataValueStringsByCodeText(patientId, startTime, endTime, codeText)
+
+    return stressLevels
+
 # Get Heart Rates of a patient filtered by start and end times
 def getAverageStressLevel(patientId, startTime, endTime):
 
@@ -219,10 +230,21 @@ def getAverageStressLevel(patientId, startTime, endTime):
     # Return average stress level   
     return g_valToStressLevel[round(averageStressVal)]
 
+# Get Exercise Hours of a patient filtered by start and end times
+def getExerciseHours(patientId, startTime, endTime):
+
+    # Code text for Exercise
+    codeText = "Exercise"
+
+    # Exercise Hours
+    exerciseHours = getDataValuesByCodeText(patientId, startTime, endTime, codeText)
+
+    return exerciseHours
+
 # Get Average Exercise Hours for a patient filtered by start and end times
 def getAverageExerciseHours(patientId, startTime, endTime):
 
-    # Code text for Stress Level
+    # Code text for Exercise
     codeText = "Exercise"
 
     # Stress Levels
@@ -239,6 +261,17 @@ def getAverageExerciseHours(patientId, startTime, endTime):
 
     # Return average exercise hourse   
     return averageExercise
+
+# Get Caffeine Intake for a patient filtered by start and end times
+def getCaffeineIntake(patientId, startTime, endTime):
+
+    # Code text for Stress Level
+    codeText = "Caffeine intake"
+
+    # Caffeine Intakes
+    caffeineIntakes = getDataValuesByCodeText(patientId, startTime, endTime, codeText)
+
+    return caffeineIntakes
 
 # Get Average Caffeine Intake for a patient filtered by start and end times
 def getAverageCaffeineIntake(patientId, startTime, endTime):
