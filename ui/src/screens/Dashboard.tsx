@@ -33,12 +33,16 @@ function Dashboard() {
         // Create the Sleep Data
         const sleepDataPoints: SleepDataPoint[] = result.data.map(
           (item) => ({
-            date: item.day,
+            day: item.day,
             hours: item.hours,
             heartRate: item.heartRate,
+            caffeine: item.caffeine,
+            exercise: item.exercise,
+            stress: item.stress,
+            age: item.age
           })
         );
-
+        
         setSleepData(sleepDataPoints);
       } catch (error) {
         console.error("Error fetching data:", error);
