@@ -86,13 +86,25 @@ def getSleepData():
     heartRates = operations.getHeartRateData(patientId, startTime, endTime)
     sleepHours = operations.getHoursSleptData(patientId, startTime, endTime)
 
+    # Get Caffeine
+    stressLevels = operations.getStressLevels(patientId, startTime, endTime)
+    exerciseHours = operations.getExerciseHours(patientId, startTime, endTime)
+    caffeine = operations.getCaffeineIntake(patientId, startTime, endTime)
+
+    # Get Age
+    age = operations.getAge(patientId)
+
     # Form the return response
     responseData = []
     for i in range(len(heartRates)):
         responseData.append({
             "day": g_DayOfWeek[dayOfWeek],
             "heartRate": heartRates[i],
-            "hours": sleepHours[i]
+            "hours": sleepHours[i],
+            "caffeine": caffeine[i],
+            "exercise": exerciseHours[i],
+            "stress": stressLevels[i],
+            "age": age
         } )
         dayOfWeek = (dayOfWeek + 1) % 7
 
