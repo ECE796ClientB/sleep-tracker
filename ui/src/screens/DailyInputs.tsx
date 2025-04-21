@@ -51,7 +51,7 @@ function DailyInputs() {
 
     try {
       const response = await fetch(
-        "https://sleep-tracker-backend.up.railway.app/createPatient",
+        "https://sleep-tracker-backend.up.railway.app/logDailies",
         {
           method: "POST",
           headers: {
