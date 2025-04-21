@@ -43,7 +43,7 @@ function DailyInputs() {
     
     // Send POST request to backend
     const payload = {
-      patientId: patientId
+      patientId: patientId,
       caffeine: data.caffeine,
       exercise: data.exercise,
       stressLevel: data.stressLevel 
