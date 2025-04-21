@@ -122,7 +122,7 @@ def logDailies():
     patientId = operations.g_PatientIds[int(dailiesRequest.get('patientId'))]
     stressLevel = dailiesRequest.get('stressLevel')
     exercise = dailiesRequest.get('exercise')
-    cupsCoffee = dailiesRequest.get('caffeine')
+    cupsCoffee = int(dailiesRequest.get('caffeine'))
 
     operations.addStressEntry(patientId, stressLevel)
     operations.addExerciseEntry(patientId, exercise)
