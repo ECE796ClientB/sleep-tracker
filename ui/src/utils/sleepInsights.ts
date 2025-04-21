@@ -25,7 +25,7 @@ export function evaluateSleepInsights(
     (d) => d.stress === "High stress" || d.stress === "Extremely Stressed"
   );
   const daysWithLowOrModerateStress = data.filter(
-    (d) => d.stress === "No stress" || (d) => d.stress === "Low stress" || d.stress === "Moderate stress"
+    (d) => d.stress === "No stress" || d.stress === "Low stress" || d.stress === "Moderate stress"
   );
   const daysWithHighHeartRate = data.filter((d) => d.heartRate > 85);
   const daysWithNoExercise = data.filter((d) => d.exercise === 0);
